@@ -2,14 +2,19 @@ package com.somosbooking.somosBack.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "user")
 public class User {
+	
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +24,9 @@ public class User {
 	private String correo;
 	private String contraseña;
 	private String telefono;
+	
+	@Column(name="tipo",  columnDefinition  = "ENUM('Administrador', 'Banda', 'Normal')'")
+	@Enumerated(EnumType.STRING)
 	private UserType tipo;
 	
 	
