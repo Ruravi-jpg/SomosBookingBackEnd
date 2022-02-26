@@ -22,7 +22,7 @@ public class User {
 	private Long id;
 	private String nombre;
 	private String correo;
-	private String contraseña;
+	private String contraseÃ±a;
 	private String telefono;
 	
 	@Column(name="tipo",  columnDefinition  = "ENUM('Administrador', 'Banda', 'Normal')'")
@@ -30,12 +30,12 @@ public class User {
 	private UserType tipo;
 	
 	
-	public User(Long id, String nombre, String correo, String contraseña, String telefono, UserType tipo) {
+	public User(Long id, String nombre, String correo, String contraseÃ±a, String telefono, UserType tipo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.correo = correo;
-		this.contraseña = contraseña;
+		this.contraseÃ±a = contraseÃ±a;
 		this.telefono = telefono;
 		this.tipo = tipo;
 	}
@@ -75,13 +75,13 @@ public class User {
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContraseÃ±a() {
+		return contraseÃ±a;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContraseÃ±a(String contraseÃ±a) {
+		this.contraseÃ±a = contraseÃ±a;
 	}
 
 
