@@ -2,7 +2,6 @@ plugins {
 	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id "com.heroku.sdk.heroku-gradle" version "2.0.0"
 }
 
 group = 'com.somosbooking'
@@ -25,3 +24,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
