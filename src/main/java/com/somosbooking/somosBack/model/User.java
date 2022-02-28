@@ -18,26 +18,32 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique = true, nullable = false)
-	private Long id;
-	private String nombre;
-	private String correo;
-	private String contraseña;
-	private String telefono;
+	@Column(name="userid", unique = true, nullable = false)
+	private Long userId;
+	@Column(name="username")
+	private String userName;
+	@Column(name="usermail")
+	private String userMail;
+	@Column(name="userpassword")
+	private String userPassword;
+	@Column(name="userphone")
+	private String userPhone;
 	
-	@Column(name="tipo",  columnDefinition  = "ENUM('Administrador', 'Banda', 'Normal')'")
+	@Column(name="usertype",  columnDefinition  = "ENUM('Administrador', 'Banda', 'Normal')'")
 	@Enumerated(EnumType.STRING)
-	private UserType tipo;
+	private UserType userType;
 	
 	
-	public User(Long id, String nombre, String correo, String contraseña, String telefono, UserType tipo) {
+	public User(Long userId, String userName, String userMail, String userPassword, String userPhone, UserType userType) {
 		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.correo = correo;
-		this.contraseña = contraseña;
-		this.telefono = telefono;
-		this.tipo = tipo;
+		this.userId = userId;
+		this.userName = userName;
+		this.userMail = userMail;
+		this.userPassword = userPassword;
+		this.userPhone = userPhone;
+		this.userType = userType;
+
+
 	}
 	
 	public User() {
@@ -45,67 +51,75 @@ public class User {
 	}
 
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userId;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long userId) {
+		this.userId = userId;
 	}
 
 
-	public String getNombre() {
-		return nombre;
+	public String getUserName() {
+		return userName;
 	}
 
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 
-	public String getCorreo() {
-		return correo;
+	public String getUserMail() {
+		return userMail;
 	}
 
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+	public String getUserPassword() {
+		return userPassword;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
 
-	public String getTelefono() {
-		return telefono;
+	public String getUserPhone() {
+		return userPhone;
 	}
 
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 
-	public UserType getTipo() {
-		return tipo;
+	public UserType getUserType() {
+		return userType;
 	}
 
 
-	public void setTipo(UserType tipo) {
-		this.tipo = tipo;
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
-   
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"userId=" + userId +
+				", userName='" + userName + '\'' +
+				", userMail='" + userMail + '\'' +
+				", userPassword='" + userPassword + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", userType=" + userType +
+				'}';
+	}
 }

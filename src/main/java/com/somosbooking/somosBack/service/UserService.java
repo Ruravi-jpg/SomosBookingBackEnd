@@ -35,14 +35,13 @@ public class UserService {
 
 	public String addUser(User user) {
 		String res = "";
-
-		Optional<User> u = userRep.findByName(user.getNombre());
-
+		
+		Optional<User> u = userRep.findByName(user.getUserName());
 		if (u.isPresent()) {
-			res = String.format("El usuario con nombre %s ya existe", user.getNombre());
+			res = String.format("El usuario con nombre %s ya existe", user.getUserName());
 		} else {
 			try{
-;				userRep.insertUser(user.getNombre(), user.getCorreo(), user.getContraseña(), user.getTelefono(), user.getTipo().ordinal());
+;				userRep.insertUser(user.getUserName(), user.getUserMail(), user.getUserPassword(), user.getUserPhone(), user.getUserType().ordinal());
 			}catch (Exception te){
 				res = te.getMessage();
 			}

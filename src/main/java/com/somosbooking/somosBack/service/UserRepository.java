@@ -16,14 +16,14 @@ import java.util.Optional;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT u FROM User u WHERE u.nombre=?1")
+    @Query("SELECT u FROM User u WHERE u.userName=?1")
     Optional<User> findByName(String userName);
 
 
     @Modifying
     @Query(
             value =
-                    "INSERT INTO user (nombre, correo, contraseña, telefono, tipo) values (:nombre, :correo, :contraseña, :telefono, :tipo)",
+                    "INSERT INTO user (userName, UserMail, userPassword, userPhone, userType) values (:nombre, :correo, :contraseña, :telefono, :tipo)",
             nativeQuery = true)
     void insertUser(@Param("nombre") String nombre,
                     @Param("correo") String correo,
