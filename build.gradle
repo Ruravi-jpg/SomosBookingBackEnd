@@ -9,16 +9,23 @@ group = 'com.somosbooking'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
-repositories {
-	mavenCentral()
+buildscript{
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		runtimeOnly 'mysql:mysql-connector-java'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	}
+
 }
 
-dependencies {
-	
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'mysql:mysql-connector-java'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+task stage {
+	dependsOn build
 }
 
 tasks.named('test') {
