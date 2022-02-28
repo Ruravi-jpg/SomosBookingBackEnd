@@ -1,26 +1,30 @@
 package com.somosbooking.somosBack.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.somosbooking.somosBack.model.article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.somosbooking.somosBack.model.User;
 
+import javax.transaction.TransactionRequiredException;
+import javax.transaction.TransactionalException;
+
 
 @Service
 public class UserService {
-	
+
 	private final UserRepository userRep;
-	
-	
-	
+
+
 	@Autowired
-	public UserService(UserRepository userRep){
+	public UserService(UserRepository userRep) {
 		this.userRep = userRep;
 	}
-	
-	public List<User> getUsers(){
+
+	public List<User> getUsers() {
 		return userRep.findAll();
 	}
 
@@ -29,7 +33,22 @@ public class UserService {
 	}
 
 
+	public String addUser(User user) {
+		String res = "";
 
+		Optional<User> u = userRep.findByName(user.getNombre());
 
+		if (u.isPresent()) {
+			res = String.format("El usuario con nombre %s ya existe", user.getNombre());
+		} else {
+			try{
+;				userRep.insertUser(user.getNombre(), user.getCorreo(), user.getContraseña(), user.getTelefono(), user.getTipo().ordinal());
+			}catch (Exception te){
+				res = te.getMessage();
+			}
 
+		}
+
+		return res;
+	}
 }
