@@ -39,4 +39,4 @@ out/
 
 ##applicationproperties##
 
-src/main/resources/application.properties
+application.properties
