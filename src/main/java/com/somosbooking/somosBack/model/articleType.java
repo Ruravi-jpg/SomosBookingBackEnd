@@ -1,5 +1,5 @@
 package com.somosbooking.somosBack.model;
 
-public class producto {
-
+public enum articleType {
+	clothe,music, hat
 }
