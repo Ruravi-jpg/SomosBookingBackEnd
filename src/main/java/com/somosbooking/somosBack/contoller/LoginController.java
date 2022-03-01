@@ -23,7 +23,7 @@ public class LoginController {
 
 
     @PostMapping
-    public String login(@RequestBody User user){
+    public int login(@RequestBody User user){
         return userService.login(user);
     }
 }

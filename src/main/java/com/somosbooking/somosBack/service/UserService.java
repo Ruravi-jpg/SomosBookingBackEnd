@@ -54,14 +54,14 @@ public class UserService {
 		return res;
 	}
 
-    public String login(User user) {
-		String res = "Usuario o contraseña ínvalidos";
+    public int login(User user) {
+		int res = 0;
 
 		Optional<User> u = userRep.findByName(user.getUserName());
 
 		if(u.isPresent()){
 			if(SHAUtil.verifyHash(user.getUserPassword(), u.get().getUserPassword())){
-				res = "Éxito";
+				res = 1;
 			}
 		}
 
