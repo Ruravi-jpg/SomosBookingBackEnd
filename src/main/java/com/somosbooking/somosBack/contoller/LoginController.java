@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/login/")
-@CrossOrigin(origins = "http://127.0.0.1:5500/")
+@CrossOrigin(origins = "http://127.0.0.1:5501/")
 public class LoginController {
     private final UserService userService;
 
