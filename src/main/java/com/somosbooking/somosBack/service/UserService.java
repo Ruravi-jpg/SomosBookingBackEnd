@@ -54,13 +54,13 @@ public class UserService {
 		return res;
 	}
 
-	public boolean login(String userName, String password) {
-		boolean res = false;
+	public User login(String userName, String password) {
+		User res = null;
 		Optional<User> u = userRep.findByName(userName);
 
 		if (u.isPresent()) {
 			if (SHAUtil.verifyHash(password, u.get().getUserPassword())) {
-				res = true;
+				res = u.get();
 			}
 		}
 

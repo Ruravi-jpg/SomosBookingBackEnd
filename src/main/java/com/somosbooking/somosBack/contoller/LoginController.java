@@ -5,8 +5,10 @@ import com.somosbooking.somosBack.jwt.config.JwtFilter;
 import com.somosbooking.somosBack.model.Token;
 import com.somosbooking.somosBack.model.User;
 import com.somosbooking.somosBack.model.UserType;
+import com.somosbooking.somosBack.model.article;
 import com.somosbooking.somosBack.service.UserRepository;
 import com.somosbooking.somosBack.service.UserService;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.ServletException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,8 +36,11 @@ public class LoginController {
     @PostMapping
     public Token login(@RequestBody User user) throws ServletException {
         String res = "Nombre de usuario o contraseña incorrectos";
-        if(userService.login(user.getUserName(), user.getUserPassword())){
-            return new Token(generateToken(user.getUserName(), user.getUserType()));
+        User u = userService.login(user.getUserName(), user.getUserPassword());
+        if(u != null){
+            Token t = new Token(generateToken(u.getUserName(), u.getUserType()));
+           // System.out.printf("claim user de token %s", getAllClaimsFromToken(t.getAccessToken()).get("role"));
+            return t;
         }
 
         throw new ServletException("Nombre de usuario o contraseña incorrectos");
@@ -52,4 +58,6 @@ public class LoginController {
                 .signWith(SignatureAlgorithm.HS256, JwtFilter.secret)
                 .compact();
     }
+
+
 }

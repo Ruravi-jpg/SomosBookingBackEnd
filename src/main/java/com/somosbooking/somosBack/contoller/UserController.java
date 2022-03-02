@@ -2,6 +2,9 @@ package com.somosbooking.somosBack.contoller;
 
 import java.util.List;
 
+import com.somosbooking.somosBack.jwt.config.JwtFilter;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,5 +39,24 @@ public class UserController {
 	@PostMapping
 	public String addUser(@RequestBody User user){
 		return userService.addUser(user);
+	}
+
+	@GetMapping(path="type/{token}")
+	public Object getUserTypeFromToken(@PathVariable("token") String token){
+		return getAllClaimsFromToken(token).get("role");
+	}
+
+	private Claims getAllClaimsFromToken(String token) {
+		Claims claims;
+		try {
+			claims = Jwts.parser()
+					.setSigningKey(JwtFilter.secret)
+					.parseClaimsJws(token)
+					.getBody();
+		} catch (Exception e) {
+			//LOGGER.error("Could not get all claims Token from passed token");
+			claims = null;
+		}
+		return claims;
 	}
 }
