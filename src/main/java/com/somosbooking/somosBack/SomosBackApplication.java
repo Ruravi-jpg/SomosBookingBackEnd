@@ -20,8 +20,8 @@ public class SomosBackApplication {
 		FilterRegistrationBean<JwtFilter> registrationBean =
 				new FilterRegistrationBean<>();
 		registrationBean.setFilter( new JwtFilter());
-		registrationBean.addUrlPatterns("/api/user/*");
-		registrationBean.addUrlPatterns("/api/article/*");
+		//registrationBean.addUrlPatterns("/api/user/*");
+		//registrationBean.addUrlPatterns("/api/article/*");
 		return registrationBean;
 	} // jwtFilter
 
