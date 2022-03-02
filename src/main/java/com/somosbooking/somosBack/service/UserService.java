@@ -36,16 +36,16 @@ public class UserService {
 
 	public String addUser(User user) {
 		String res = "Éxito";
-		
+
 		Optional<User> u = userRep.findByName(user.getUserName());
 		if (u.isPresent()) {
 			res = String.format("El usuario con nombre %s ya existe", user.getUserName());
 		} else {
-			try{
-;				//userRep.insertUser(user.getUserName(), user.getUserMail(), user.getUserPassword(), user.getUserPhone(), user.getUserType().ordinal());
+			try {
+				;                //userRep.insertUser(user.getUserName(), user.getUserMail(), user.getUserPassword(), user.getUserPhone(), user.getUserType().ordinal());
 				user.setUserPassword(SHAUtil.createHash(user.getUserPassword()));
 				userRep.save(user);
-			}catch (Exception te){
+			} catch (Exception te) {
 				res = te.getMessage();
 			}
 
@@ -54,17 +54,17 @@ public class UserService {
 		return res;
 	}
 
-    public int login(User user) {
-		int res = 0;
+	public boolean login(String userName, String password) {
+		boolean res = false;
+		Optional<User> u = userRep.findByName(userName);
 
-		Optional<User> u = userRep.findByName(user.getUserName());
-
-		if(u.isPresent()){
-			if(SHAUtil.verifyHash(user.getUserPassword(), u.get().getUserPassword())){
-				res = 1;
+		if (u.isPresent()) {
+			if (SHAUtil.verifyHash(password, u.get().getUserPassword())) {
+				res = true;
 			}
 		}
 
 		return res;
-    }
+	}
+
 }
