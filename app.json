@@ -1,0 +1,8 @@
+{
+  "name": "somos-booking",
+  "buildpacks": [
+    {
+      "url": "heroku/gradle"
+    }
+  ]
+}

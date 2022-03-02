@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.somosbooking.somosBack.model.article;
+import com.somosbooking.somosBack.utils.SHAUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,15 +35,17 @@ public class UserService {
 
 
 	public String addUser(User user) {
-		String res = "";
-		
+		String res = "Éxito";
+
 		Optional<User> u = userRep.findByName(user.getUserName());
 		if (u.isPresent()) {
 			res = String.format("El usuario con nombre %s ya existe", user.getUserName());
 		} else {
-			try{
-;				userRep.insertUser(user.getUserName(), user.getUserMail(), user.getUserPassword(), user.getUserPhone(), user.getUserType().ordinal());
-			}catch (Exception te){
+			try {
+				;                //userRep.insertUser(user.getUserName(), user.getUserMail(), user.getUserPassword(), user.getUserPhone(), user.getUserType().ordinal());
+				user.setUserPassword(SHAUtil.createHash(user.getUserPassword()));
+				userRep.save(user);
+			} catch (Exception te) {
 				res = te.getMessage();
 			}
 
@@ -50,4 +53,18 @@ public class UserService {
 
 		return res;
 	}
+
+	public boolean login(String userName, String password) {
+		boolean res = false;
+		Optional<User> u = userRep.findByName(userName);
+
+		if (u.isPresent()) {
+			if (SHAUtil.verifyHash(password, u.get().getUserPassword())) {
+				res = true;
+			}
+		}
+
+		return res;
+	}
+
 }
