@@ -18,11 +18,12 @@ plugins {
 	id 'java'
 }
 
+
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart',
-                   'Implementation-Version': version,
+        attributes (
                    'Main-Class': 'com.somosbooking.somosback.SomosBackApplication'
+		)
     }
 }
 
