@@ -17,14 +17,6 @@ plugins {
 	id 'java'
 }
 
-jar{
-	mainfest{
-		attributes(
-			'Main-Class': 'com.somosbooking.somosback.SomosBackApplication'
-		)
-	}
-}
-
 group = 'com.somosbooking'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
