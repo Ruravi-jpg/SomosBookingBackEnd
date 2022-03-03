@@ -19,7 +19,7 @@ import com.somosbooking.somosBack.service.articleService;
 
 @RestController
 @RequestMapping(path = "/api/article/")
-@CrossOrigin(origins="http://127.0.0.1:5500/")
+@CrossOrigin(origins="*")
 public class articleController {
 	private final articleService artServ;
 	@Autowired
