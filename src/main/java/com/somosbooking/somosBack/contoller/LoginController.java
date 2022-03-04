@@ -12,6 +12,10 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import io.swagger.annotations.Api;
@@ -26,6 +30,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path="/api/login/")
 @CrossOrigin(origins = "http://127.0.0.1:5500/")
+@Api(value="Adiministra el inicio de sesión de los usuarios", description = "Devuelve un Token, administrando cada accseso de usuarios")
 public class LoginController {
     private final UserService userService;
     
@@ -35,6 +40,13 @@ public class LoginController {
     }
 
 
+
+    @ApiOperation(value ="Login del usuario, se recibe un token en caso satisfactorio", response=Token.class)
+    @ApiResponses(value = {
+    	@ApiResponse(code=200, message="Login exitoso, retorna un accsessToken, dependiendo del tipo de usuario registrado"),
+    	@ApiResponse(code=404, message="Not Found, Error en la conexión con el servidor"),
+    	@ApiResponse(code=500, message="Internal Server Error, Nombre de usuario o contraseña incorrectos")
+    })
     @PostMapping
     public Token login(@RequestBody User user) throws ServletException {
         String res = "Nombre de usuario o contraseÃ±a incorrectos";
