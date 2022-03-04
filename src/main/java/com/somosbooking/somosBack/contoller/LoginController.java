@@ -13,6 +13,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/login/")
-@CrossOrigin(origins = "http://127.0.0.1:5500/")
+@CrossOrigin(origins = "*")
 public class LoginController {
     private final UserService userService;
     
@@ -36,6 +37,7 @@ public class LoginController {
 
 
     @PostMapping
+    @ApiOperation(value = "Login para usuario, recibe un objeto JSON con un nombre de usuario y contraseña, valida si el usuario existe, en caso de que si exista genera un Token y lo retorna")
     public Token login(@RequestBody User user) throws ServletException {
         String res = "Nombre de usuario o contraseña incorrectos";
         User u = userService.login(user.getUserName(), user.getUserPassword());

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/productCart/")
-@CrossOrigin(origins = "http://127.0.0.1:5501/")
+@CrossOrigin(origins = "*")
 public class ProductCartController {
 
 

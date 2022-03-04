@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cart/")
-@CrossOrigin(origins = "http://127.0.0.1:5501/")
+@CrossOrigin(origins = "*")
 public class CartController {
 private final CartService cartService;
 

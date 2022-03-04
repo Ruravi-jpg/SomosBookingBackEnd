@@ -13,7 +13,7 @@ import com.somosbooking.somosBack.service.UserService;
 
 @RestController
 @RequestMapping(path = "/api/user/")
-@CrossOrigin(origins = "http://127.0.0.1:5500/")
+@CrossOrigin(origins = "*")
 public class UserController {
 	
 	private final UserService userService;
