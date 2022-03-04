@@ -11,7 +11,10 @@ import com.somosbooking.somosBack.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
@@ -22,15 +25,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/login/")
-@CrossOrigin(origins = "http://127.0.0.1:5501/")
+@CrossOrigin(origins = "http://127.0.0.1:5500/")
 public class LoginController {
     private final UserService userService;
-
+    
     @Autowired
     public LoginController(UserService userService) {
         this.userService = userService;
     }
-
 
 
     @PostMapping
