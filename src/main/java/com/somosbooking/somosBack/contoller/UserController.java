@@ -31,32 +31,38 @@ public class UserController {
 	}
 	
 	@GetMapping(path = "{userId}")
-	public User getUser(@PathVariable("userId") Long userId) {
+	public User getUser(@PathVariable("userId") int userId) {
 		return userService.getUser(userId);
 	}
 
 
 	@PostMapping
+	@ResponseBody
 	public String addUser(@RequestBody User user){
 		return userService.addUser(user);
 	}
 
 	@GetMapping(path="type/{token}")
 	public Object getUserTypeFromToken(@PathVariable("token") String token){
-		return getAllClaimsFromToken(token).get("role");
+		return getObjectFromClaim(token, "role");
 	}
 
-	private Claims getAllClaimsFromToken(String token) {
-		Claims claims;
+	@GetMapping(path="id/{token}")
+	public Object getUserIdFromToken(@PathVariable("token") String token){
+		return getObjectFromClaim(token, "idUser");
+	}
+
+	private Object getObjectFromClaim(String token, String claimName) {
+		Object res;
 		try {
-			claims = Jwts.parser()
+			res = Jwts.parser()
 					.setSigningKey(JwtFilter.secret)
 					.parseClaimsJws(token)
-					.getBody();
+					.getBody().get(claimName);
 		} catch (Exception e) {
 			//LOGGER.error("Could not get all claims Token from passed token");
-			claims = null;
+			res = null;
 		}
-		return claims;
+		return res;
 	}
 }

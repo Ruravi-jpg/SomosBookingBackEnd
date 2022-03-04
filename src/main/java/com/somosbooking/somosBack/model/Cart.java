@@ -1,26 +1,35 @@
 package com.somosbooking.somosBack.model;
 
 
+import org.hibernate.annotations.OnDelete;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="cart")
+@Table(name="cart",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "idCart")
+    }
+)
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idCart", nullable = false)
+    @Column(name="idcart", nullable = false)
     private int idCart;
-    @Column(name="idClient", nullable = false)
-    private int idClient;
-    @Column(name="cartActive", nullable = false)
+    //@Column(name="idClient", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="idclient", nullable = false,
+        foreignKey = @ForeignKey(name="fk_idCliente"))
+    private User client;
+    @Column(name="cartactive", nullable = false)
     private boolean cartActive;
-    @Column(name="total", nullable = false)
+    @Column(name="total")
     private double total;
 
 
-    public Cart(int idCart, int idClient, boolean cartActive, double total) {
+    public Cart(int idCart, User client, boolean cartActive, double total) {
         this.idCart = idCart;
-        this.idClient = idClient;
+        this.client = client;
         this.cartActive = cartActive;
         this.total = total;
     }
@@ -36,12 +45,12 @@ public class Cart {
         this.idCart = idCart;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public User getIdClient() {
+        return client;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public void setIdClient(User client) {
+        this.client = client;
     }
 
     public boolean isCartActive() {

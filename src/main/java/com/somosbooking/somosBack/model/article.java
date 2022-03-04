@@ -1,16 +1,11 @@
 package com.somosbooking.somosBack.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name="article")
+@Table(name="article", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "idarticle")
+})
 public class article {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -38,7 +38,7 @@ public class LoginController {
         String res = "Nombre de usuario o contraseña incorrectos";
         User u = userService.login(user.getUserName(), user.getUserPassword());
         if(u != null){
-            Token t = new Token(generateToken(u.getUserName(), u.getUserType()));
+            Token t = new Token(generateToken(u.getUserName(), u.getUserType(), u.getUserId()));
            // System.out.printf("claim user de token %s", getAllClaimsFromToken(t.getAccessToken()).get("role"));
             return t;
         }
@@ -47,12 +47,13 @@ public class LoginController {
     }
 
 
-    private String generateToken(String userName, UserType usertype){
+    private String generateToken(String userName, UserType usertype, long iduser){
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR, 10);
         return Jwts.builder()
                 .setSubject(userName)
                 .claim("role", usertype)
+                .claim("idUser", iduser)
                 .setIssuedAt(new Date())
                 .setExpiration(calendar.getTime())
                 .signWith(SignatureAlgorithm.HS256, JwtFilter.secret)

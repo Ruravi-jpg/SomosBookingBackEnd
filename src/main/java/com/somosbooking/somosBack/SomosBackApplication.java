@@ -15,14 +15,14 @@ public class SomosBackApplication {
 		SpringApplication.run(SomosBackApplication.class, args);
 	}
 
-	@Bean
-	public FilterRegistrationBean<JwtFilter> jwtFilter() {
-		FilterRegistrationBean<JwtFilter> registrationBean =
-				new FilterRegistrationBean<>();
-		registrationBean.setFilter( new JwtFilter());
-		registrationBean.addUrlPatterns("/api/user/*");
-		registrationBean.addUrlPatterns("/api/article/*");
-		return registrationBean;
-	} // jwtFilter
+//	@Bean
+//	public FilterRegistrationBean<JwtFilter> jwtFilter() {
+//		FilterRegistrationBean<JwtFilter> registrationBean =
+//				new FilterRegistrationBean<>();
+//		registrationBean.setFilter( new JwtFilter());
+//		//registrationBean.addUrlPatterns("/api/user/*");
+//		//registrationBean.addUrlPatterns("/api/article/*");
+//		return registrationBean;
+//	} // jwtFilter
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.somosbooking.somosBack.model.User;
 
+import javax.servlet.ServletException;
 import javax.transaction.TransactionRequiredException;
 import javax.transaction.TransactionalException;
 
@@ -29,7 +30,7 @@ public class UserService {
 		return userRep.findAll();
 	}
 
-	public User getUser(Long userId) {
+	public User getUser(int userId) {
 		return userRep.findById(userId).orElseThrow(() -> new IllegalStateException("el usuario con id " + userId + " No existe"));
 	}
 
